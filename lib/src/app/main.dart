@@ -173,18 +173,18 @@ class RecipeHomePage extends StatelessWidget {
           return GestureDetector(
               onTap: () {
                 //_showToast(context, item);
-                /*var movieBloc = BlocProvider.of<MovieBloc>(context);
-                if(movieBloc != null){
-                  movieBloc.fetchMovies('');
-                }*/
-                Navigator.push(
+                var movieBloc = BlocProvider.of<MovieBloc>(context);
+                item.title = "Test";
+                list[index] = item;
+                movieBloc.changeName(list);
+                /*Navigator.push(
                   context,
                   MaterialPageRoute(
                     builder: (context) {
                       return RecipeDetailPage(model: item);
                     },
                   ),
-                );
+                );*/
               },
               child: buildRecipeWidget(item));
         });

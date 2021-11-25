@@ -21,6 +21,10 @@ class MovieBloc implements Bloc {
     _movieController.sink.add(results);
   }
 
+  void changeName(List<RModel> list){
+   _movieController.sink.add(list);
+  }
+
   @override
   void dispose() {
     _movieController.close();

@@ -5,7 +5,7 @@ part 'recipe_model.g.dart';
 @JsonSerializable()
 class RModel {
   @JsonKey(name: 'Title')
-  final String title;
+  String title;
   @JsonKey(name: 'Poster')
   final String poster;
 
