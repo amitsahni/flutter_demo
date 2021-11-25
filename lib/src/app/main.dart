@@ -7,9 +7,11 @@ import 'package:f_d/src/app/bLoc/base/bloc_provider.dart';
 import 'package:f_d/src/app/bLoc/movie_bloc.dart';
 import 'package:f_d/src/domain/repository/recipe_repository.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:koin/koin.dart';
 import 'package:koin_flutter/src/widget_extension.dart';
 import 'di/module.dart';
+import 'localization/app_localization.dart';
 
 void main() {
   startKoin((app) {
@@ -22,7 +24,18 @@ class RecipeApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     ThemeData themeData = ThemeData();
+    Locale _appLocale = Locale('ar');
     return MaterialApp(
+        locale: _appLocale,
+        supportedLocales: const [
+          Locale('en', 'US'),
+          Locale('ar', ''),
+        ],
+        localizationsDelegates: const [
+          AppLocalizations.delegate,
+          GlobalMaterialLocalizations.delegate,
+          GlobalWidgetsLocalizations.delegate,
+        ],
         title: "Recipe Calculator",
         theme: themeData.copyWith(
             colorScheme: themeData.colorScheme.copyWith(
@@ -54,7 +67,7 @@ class RecipeHomePage extends StatelessWidget {
         bloc: bloc,
         child: Scaffold(
           appBar: AppBar(
-            title: Text(title),
+            title: Text(AppLocalizations.of(context).translate('title')),
           ),
           body: SafeArea(
             child: _buildResults(bloc),
