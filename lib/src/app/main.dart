@@ -176,7 +176,7 @@ class RecipeHomePage extends StatelessWidget {
                 var movieBloc = BlocProvider.of<MovieBloc>(context);
                 item.title = "Test";
                 list[index] = item;
-                movieBloc.changeName(list);
+                movieBloc.update(list);
                 /*Navigator.push(
                   context,
                   MaterialPageRoute(
