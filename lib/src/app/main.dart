@@ -2,7 +2,6 @@ import 'package:dio/dio.dart';
 import 'package:f_d/src/app/recipe_detail.dart';
 import 'package:f_d/src/app/vm/recipe_vm.dart';
 import 'package:f_d/src/data/model/recipe_model.dart';
-import 'package:f_d/src/data/service/recipe_service_retrofit.dart';
 import 'package:f_d/src/app/bLoc/base/bloc_provider.dart';
 import 'package:f_d/src/app/bLoc/movie_bloc.dart';
 import 'package:f_d/src/domain/repository/recipe_repository.dart';
@@ -123,8 +122,6 @@ class RecipeHomePage extends StatelessWidget {
 
   // build list view & manage states
   Widget _buildBody(BuildContext context) {
-    final client = RecipeServiceRetrofit(
-        Dio(BaseOptions(contentType: "application/json")));
     var recipeRepository = get<RecipeRepository>();
     final someMap = {
       "s": "batman",
