@@ -2,20 +2,22 @@ import 'dart:async';
 
 import 'package:f_d/src/data/model/recipe_model.dart';
 import 'package:f_d/src/domain/repository/recipe_repository.dart';
+import 'package:f_d/src/domain/usecase/use_case.dart';
 
 import 'base/bloc_provider.dart';
 
 class MovieBloc implements Bloc {
-  final RecipeRepository recipeRepository;
+  final MovieUseCase movieUseCase;
 
-  MovieBloc(this.recipeRepository);
+  MovieBloc(this.movieUseCase);
 
   final _movieController = StreamController<List<RModel>>();
 
   Stream<List<RModel>> get locationStream => _movieController.stream;
 
+
   void fetchMovies(String query) async {
-    final results = await recipeRepository.fetchMediaList(query);
+    final results = await movieUseCase.executes();
     _movieController.sink.add(results);
   }
 

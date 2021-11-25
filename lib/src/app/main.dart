@@ -119,10 +119,12 @@ class RecipeHomePage extends StatelessWidget {
     };
     var recipeVM = get<RecipeViewModel>();
     return FutureBuilder<List<RModel>>(
-      future: recipeRepository.fetchMediaList(''),
+      future: recipeRepository.fetchMediaList(),
       builder: (context, snapshot) {
         // 1
         final results = snapshot.data;
+
+        List.empty();
 
         if (results == null) {
           return const Center(

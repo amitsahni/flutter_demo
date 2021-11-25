@@ -18,7 +18,7 @@ class RecipeViewModel with ChangeNotifier {
   Future<void> fetchMediaData(String value) async {
     _apiResponse = ApiResponse.loading('Loading...');
     try {
-      var mediaList = await recipeRepository.fetchMediaList(value);
+      var mediaList = await recipeRepository.fetchMediaList();
       _apiResponse = ApiResponse.completed(mediaList);
     } catch (e) {
       _apiResponse = ApiResponse.error(e.toString());
