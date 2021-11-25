@@ -1,6 +1,6 @@
-import 'package:f_d/data/repositoryImpl/recipe_repository.dart';
-import 'package:f_d/data/service/base/api_response.dart';
-import 'package:f_d/domain/repository/recipe_repository.dart';
+import 'package:f_d/src/data/repositoryImpl/recipe_repository.dart';
+import 'package:f_d/src/data/service/base/api_response.dart';
+import 'package:f_d/src/domain/repository/recipe_repository.dart';
 import 'package:flutter/material.dart';
 
 class RecipeViewModel with ChangeNotifier {

@@ -1,5 +1,5 @@
 import 'package:dio/dio.dart';
-import 'package:f_d/data/model/recipe_model.dart';
+import 'package:f_d/src/data/model/recipe_model.dart';
 import 'package:retrofit/http.dart';
 part 'recipe_service_retrofit.g.dart';
 

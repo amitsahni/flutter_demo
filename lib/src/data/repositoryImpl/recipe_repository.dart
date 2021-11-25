@@ -1,7 +1,7 @@
-import 'package:f_d/data/model/recipe_model.dart';
-import 'package:f_d/data/service/base/base_service.dart';
-import 'package:f_d/data/service/recipe_service.dart';
-import 'package:f_d/domain/repository/recipe_repository.dart';
+import 'package:f_d/src/data/model/recipe_model.dart';
+import 'package:f_d/src/data/service/base/base_service.dart';
+import 'package:f_d/src/data/service/recipe_service.dart';
+import 'package:f_d/src/domain/repository/recipe_repository.dart';
 
 class RecipeRepositoryImpl implements RecipeRepository {
   final BaseService _mediaService;

@@ -1,4 +1,4 @@
-import 'package:f_d/data/model/recipe_model.dart';
+import 'package:f_d/src/data/model/recipe_model.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 

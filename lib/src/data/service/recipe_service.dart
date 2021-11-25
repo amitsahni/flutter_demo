@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 
 import 'base/app_exception.dart';
 import 'base/base_service.dart';
-import 'package:f_d/data/service/base/base_service.dart';
+import 'package:f_d/src/data/service/base/base_service.dart';
 
 class RecipeService extends BaseService {
 

@@ -1,8 +1,9 @@
 import 'dart:async';
 
-import 'package:f_d/data/model/recipe_model.dart';
-import 'package:f_d/domain/bLoc/base/bloc.dart';
-import 'package:f_d/domain/repository/recipe_repository.dart';
+import 'package:f_d/src/data/model/recipe_model.dart';
+import 'package:f_d/src/domain/repository/recipe_repository.dart';
+
+import 'base/bloc_provider.dart';
 
 class MovieBloc implements Bloc {
   final RecipeRepository recipeRepository;
