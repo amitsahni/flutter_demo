@@ -5,13 +5,13 @@ import 'base/base_use_case.dart';
 
 class MovieUseCase extends UseCase<Map<String, dynamic>,List<RModel>> {
 
-  final RecipeRepository recipeRepository;
+  final RecipeRepository _recipeRepository;
 
-  MovieUseCase(this.recipeRepository);
+  MovieUseCase(this._recipeRepository);
 
   @override
   Future<List<RModel>> executes({Map<String, dynamic> input = const {}}) async {
-    return recipeRepository.fetchMediaList();
+    return _recipeRepository.fetchMediaList();
   }
 }
 

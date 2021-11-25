@@ -7,9 +7,9 @@ import 'package:f_d/src/domain/usecase/use_case.dart';
 import 'base/bloc_provider.dart';
 
 class MovieBloc implements Bloc {
-  final MovieUseCase movieUseCase;
+  final MovieUseCase _movieUseCase;
 
-  MovieBloc(this.movieUseCase);
+  MovieBloc(this._movieUseCase);
 
   final _movieController = StreamController<List<RModel>>();
 
@@ -17,7 +17,7 @@ class MovieBloc implements Bloc {
 
 
   void fetchMovies(String query) async {
-    final results = await movieUseCase.executes();
+    final results = await _movieUseCase.executes();
     _movieController.sink.add(results);
   }
 
