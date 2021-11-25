@@ -15,18 +15,38 @@ class MovieBloc implements Bloc {
 
   Stream<List<RModel>> get locationStream => _movieController.stream;
 
-
   void fetchMovies(String query) async {
     final results = await _movieUseCase.executes();
     _movieController.sink.add(results);
   }
 
-  void update(List<RModel> list){
-   _movieController.sink.add(list);
+  void update(List<RModel> list) {
+    _movieController.sink.add(list);
   }
 
   @override
   void dispose() {
     _movieController.close();
+  }
+}
+
+class MovieItemBloc implements Bloc {
+  final RModel _movieItem;
+
+  MovieItemBloc(this._movieItem);
+
+  RModel get movieItem => _movieItem;
+
+  final _movieItemController = StreamController<RModel>();
+
+  Stream<RModel> get movieItemStream => _movieItemController.stream;
+
+  void update(RModel list) {
+    _movieItemController.sink.add(list);
+  }
+
+  @override
+  void dispose() {
+    _movieItemController.close();
   }
 }

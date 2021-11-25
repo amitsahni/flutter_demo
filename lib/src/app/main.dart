@@ -180,13 +180,14 @@ class RecipeHomePage extends StatelessWidget {
         itemCount: list.length,
         itemBuilder: (BuildContext context, int index) {
           var item = list[index];
+          var movieItemBloc = MovieItemBloc(item);
           return GestureDetector(
               onTap: () {
                 //_showToast(context, item);
                 var movieBloc = BlocProvider.of<MovieBloc>(context);
                 item.title = "Test";
-                list[index] = item;
-                movieBloc.update(list);
+                //list[index] = item;
+                movieItemBloc.update(item);
                 /*Navigator.push(
                   context,
                   MaterialPageRoute(
@@ -196,7 +197,44 @@ class RecipeHomePage extends StatelessWidget {
                   ),
                 );*/
               },
-              child: buildRecipeWidget(item));
+              child: BlocProvider<MovieItemBloc>(
+                bloc: movieItemBloc,
+                child: _buildRecipeWidget(movieItemBloc),
+              ));
         });
+  }
+
+  Widget _buildRecipeWidget(MovieItemBloc movieItemBloc) {
+    return StreamBuilder<RModel>(
+      stream: movieItemBloc.movieItemStream,
+      initialData: movieItemBloc.movieItem,
+      builder: (context, snapshot) {
+        final recipeModel = snapshot.data!;
+        return Card(
+            elevation: 3.0,
+            color: Colors.white,
+            shadowColor: Colors.yellow,
+            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8.0)),
+            child: Padding(
+              padding: const EdgeInsets.only(bottom: 5.0),
+              child: Column(
+                children: [
+                  Image(image: NetworkImage(recipeModel.poster), height: 80),
+                  const SizedBox(
+                    height: 14.0,
+                  ),
+                  Text(
+                    recipeModel.title,
+                    style: const TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.w900,
+                        fontFamily: "Palatino"),
+                  )
+                ],
+              ),
+            ));
+      },
+    );
+
   }
 }
