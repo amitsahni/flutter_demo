@@ -2,7 +2,7 @@ import 'package:f_d/src/app/vm/recipe_vm.dart';
 import 'package:f_d/src/data/repositoryImpl/recipe_repository.dart';
 import 'package:f_d/src/data/service/base/base_service.dart';
 import 'package:f_d/src/data/service/recipe_service.dart';
-import 'package:f_d/src/domain/bLoc/movie_bloc.dart';
+import 'package:f_d/src/app/bLoc/movie_bloc.dart';
 import 'package:f_d/src/domain/repository/recipe_repository.dart';
 import 'package:f_d/src/domain/usecase/use_case.dart';
 import 'package:koin/koin.dart';
