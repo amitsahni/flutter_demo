@@ -17,6 +17,11 @@ class MovieBloc implements Bloc {
 
   Stream<DataResult<RModel>> get locationStream => _movieController.stream;
 
+  @override
+  void initState() async {
+    //final results = await _movieUseCase.executes();
+    //_movieController.sink.add(results);
+  }
 
   void fetchMovies(String query) async {
     final results = await _movieUseCase.executes();

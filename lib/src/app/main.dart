@@ -51,6 +51,8 @@ class RecipeHomePage extends StatelessWidget {
 
   final String title;
 
+
+
   @override
   Widget build(BuildContext context) {
     /*return Scaffold(
@@ -63,6 +65,7 @@ class RecipeHomePage extends StatelessWidget {
     );*/
     // 1
     final bloc = get<MovieBloc>();
+    bloc.fetchMovies('query');
     return BlocProvider<MovieBloc>(
         bloc: bloc,
         child: Scaffold(
@@ -151,7 +154,6 @@ class RecipeHomePage extends StatelessWidget {
   }
 
   Widget _buildResults(MovieBloc bloc) {
-    bloc.fetchMovies('');
     return StreamBuilder<DataResult<RModel>>(
       stream: bloc.locationStream,
       builder: (context, snapshot) {
