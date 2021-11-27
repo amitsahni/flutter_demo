@@ -75,7 +75,7 @@ class RecipeHomePage extends StatelessWidget {
         ));
   }
 
-  void _showToast(BuildContext context, RModel recipeModel) {
+  void _showToast(BuildContext context, Search recipeModel) {
     final scaffold = ScaffoldMessenger.of(context);
     scaffold.showSnackBar(
       SnackBar(
@@ -95,7 +95,7 @@ class RecipeHomePage extends StatelessWidget {
     );*/
   }
 
-  Widget buildRecipeWidget(RModel recipeModel) {
+  Widget buildRecipeWidget(Search recipeModel) {
     return Card(
         elevation: 3.0,
         color: Colors.white,
@@ -129,13 +129,11 @@ class RecipeHomePage extends StatelessWidget {
       "apikey": "bbf02d07",
     };
     var recipeVM = get<RecipeViewModel>();
-    return FutureBuilder<DataResult<List<RModel>>>(
+    return FutureBuilder<DataResult<RModel>>(
       future: recipeRepository.fetchMediaList(),
       builder: (context, snapshot) {
         // 1
         final results = snapshot.data;
-
-        List.empty();
 
         if (results == null) {
           return const Center(
@@ -143,18 +141,18 @@ class RecipeHomePage extends StatelessWidget {
           );
         }
 
-        if (results.data!.isEmpty) {
+        if (results.data!.list.isEmpty) {
           return const Center(child: Text('No Results'));
         }
 
-        return _buildListView(results.data!);
+        return _buildListView(results.data!.list);
       },
     );
   }
 
   Widget _buildResults(MovieBloc bloc) {
     bloc.fetchMovies('');
-    return StreamBuilder<DataResult<List<RModel>>>(
+    return StreamBuilder<DataResult<RModel>>(
       stream: bloc.locationStream,
       builder: (context, snapshot) {
         // 1
@@ -165,7 +163,7 @@ class RecipeHomePage extends StatelessWidget {
           );
         }
         if(result.isSuccess == true){
-          final results = result.data!;
+          final results = result.data!.list;
 
           if (results.isEmpty) {
             return const Center(child: Text('No Results'));
@@ -181,7 +179,7 @@ class RecipeHomePage extends StatelessWidget {
   }
 
   // build list view & its tile
-  Widget _buildListView(List<RModel> list) {
+  Widget _buildListView(List<Search> list) {
     return ListView.builder(
         itemCount: list.length,
         itemBuilder: (BuildContext context, int index) {

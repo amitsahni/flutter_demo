@@ -9,13 +9,11 @@ class RecipeRepositoryImpl implements RecipeRepository {
   RecipeRepositoryImpl(this._mediaService);
 
   @override
-  Future<DataResult<List<RModel>>> fetchMediaList(
+  Future<DataResult<RModel>> fetchMediaList(
       {Map<String, dynamic> input = const {}}) async {
     DataResult<dynamic> response = await _mediaService.batmanMovies("");
     var result = response.either((error) => error, (data) {
-      final Iterable json = data["Search"];
-      var list = json.map((movie) => RModel.fromJson(movie)).toList();
-      return list;
+      return RModel.fromJson(data);
     });
     return result;
   }

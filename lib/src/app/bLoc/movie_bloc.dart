@@ -13,9 +13,9 @@ class MovieBloc implements Bloc {
 
   MovieBloc(this._movieUseCase);
 
-  final _movieController = StreamController<DataResult<List<RModel>>>();
+  final _movieController = StreamController<DataResult<RModel>>();
 
-  Stream<DataResult<List<RModel>>> get locationStream => _movieController.stream;
+  Stream<DataResult<RModel>> get locationStream => _movieController.stream;
 
 
   void fetchMovies(String query) async {
@@ -23,8 +23,8 @@ class MovieBloc implements Bloc {
     _movieController.sink.add(results);
   }
 
-  void update(List<RModel> list){
-   _movieController.sink.add(DataResult.success(list));
+  void update(List<Search> item){
+   _movieController.sink.add(DataResult.success(RModel()..list = item));
   }
 
   @override

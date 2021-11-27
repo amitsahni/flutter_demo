@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 class RecipeDetailPage extends StatefulWidget {
   const RecipeDetailPage({Key? key, required this.model}) : super(key: key);
 
-  final RModel model;
+  final Search model;
 
   @override
   State<StatefulWidget> createState() {
