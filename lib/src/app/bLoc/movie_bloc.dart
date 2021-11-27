@@ -1,8 +1,10 @@
 import 'dart:async';
 
+import 'package:f_d/src/data/model/data_result.dart';
 import 'package:f_d/src/data/model/recipe_model.dart';
 import 'package:f_d/src/domain/repository/recipe_repository.dart';
 import 'package:f_d/src/domain/usecase/use_case.dart';
+import 'package:flutter/material.dart';
 
 import 'base/bloc_provider.dart';
 
@@ -11,9 +13,9 @@ class MovieBloc implements Bloc {
 
   MovieBloc(this._movieUseCase);
 
-  final _movieController = StreamController<List<RModel>>();
+  final _movieController = StreamController<DataResult<List<RModel>>>();
 
-  Stream<List<RModel>> get locationStream => _movieController.stream;
+  Stream<DataResult<List<RModel>>> get locationStream => _movieController.stream;
 
 
   void fetchMovies(String query) async {
@@ -22,7 +24,7 @@ class MovieBloc implements Bloc {
   }
 
   void update(List<RModel> list){
-   _movieController.sink.add(list);
+   _movieController.sink.add(DataResult.success(list));
   }
 
   @override

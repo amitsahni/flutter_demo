@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:f_d/src/app/recipe_detail.dart';
 import 'package:f_d/src/app/vm/recipe_vm.dart';
+import 'package:f_d/src/data/model/data_result.dart';
 import 'package:f_d/src/data/model/recipe_model.dart';
 import 'package:f_d/src/app/bLoc/base/bloc_provider.dart';
 import 'package:f_d/src/app/bLoc/movie_bloc.dart';
@@ -128,7 +129,7 @@ class RecipeHomePage extends StatelessWidget {
       "apikey": "bbf02d07",
     };
     var recipeVM = get<RecipeViewModel>();
-    return FutureBuilder<List<RModel>>(
+    return FutureBuilder<DataResult<List<RModel>>>(
       future: recipeRepository.fetchMediaList(),
       builder: (context, snapshot) {
         // 1
@@ -142,34 +143,39 @@ class RecipeHomePage extends StatelessWidget {
           );
         }
 
-        if (results.isEmpty) {
+        if (results.data!.isEmpty) {
           return const Center(child: Text('No Results'));
         }
 
-        return _buildListView(results);
+        return _buildListView(results.data!);
       },
     );
   }
 
   Widget _buildResults(MovieBloc bloc) {
     bloc.fetchMovies('');
-    return StreamBuilder<List<RModel>>(
+    return StreamBuilder<DataResult<List<RModel>>>(
       stream: bloc.locationStream,
       builder: (context, snapshot) {
         // 1
-        final results = snapshot.data;
-
-        if (results == null) {
+        var result = snapshot.data;
+        if (result == null) {
           return const Center(
             child: CircularProgressIndicator(),
           );
         }
+        if(result.isSuccess == true){
+          final results = result.data!;
 
-        if (results.isEmpty) {
-          return const Center(child: Text('No Results'));
+          if (results.isEmpty) {
+            return const Center(child: Text('No Results'));
+          }
+
+          return _buildListView(results);
+        }else{
+          String error = result.error!.toString();
+          return Center(child: Text(error));
         }
-
-        return _buildListView(results);
       },
     );
   }
