@@ -14,5 +14,9 @@ class MovieUseCase extends UseCase<Map<String, dynamic>,DataResult<RModel>> {
   Future<DataResult<RModel>> executes({Map<String, dynamic> input = const {}}) async {
     return _recipeRepository.fetchMediaList();
   }
+
+  Stream<DataResult<RModel>> exectue(){
+    return Stream.fromFuture(_recipeRepository.fetchMediaList());
+  }
 }
 

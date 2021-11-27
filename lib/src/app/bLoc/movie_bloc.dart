@@ -13,7 +13,7 @@ class MovieBloc implements Bloc {
 
   MovieBloc(this._movieUseCase);
 
-  final _movieController = StreamController<DataResult<RModel>>.broadcast();
+  final _movieController = StreamController<DataResult<RModel>>();
 
   Stream<DataResult<RModel>> get locationStream => _movieController.stream;
 
