@@ -10,7 +10,7 @@ import 'package:koin/koin.dart';
 final myModule = Module()
   ..factory((s) => RecipeViewModel(s.get()))
   ..factory((s) => MovieUseCase(s.get()))
-  ..factory((scope) => MovieBloc(scope.get()))
+  ..single((scope) => MovieBloc(scope.get()))
   ..single((scope) => getDio('http://www.omdbapi.com/'))
   ..single<RecipeRepository>((s) => RecipeRepositoryImpl(s.get()))
   ..single((scope) => RecipeService());

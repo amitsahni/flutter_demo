@@ -6,12 +6,12 @@ import 'package:f_d/src/data/service/base/base_service.dart';
 
 class RecipeService extends BaseService {
 
-  dynamic batmanMovies(String url) async {
+  Future<DataResult<dynamic>> batmanMovies(String url) async {
     var queryParam = {
       "s" : "batman",
       "apikey" : "bbf02d07"
     };
-    return await getCall("", queryParameters: queryParam);
+    return getCall("", queryParameters: queryParam);
   }
 
 }
