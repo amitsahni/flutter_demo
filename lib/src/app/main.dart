@@ -10,6 +10,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:koin/koin.dart';
 import 'package:koin_flutter/src/widget_extension.dart';
+import 'base/base.dart';
 import 'di/module.dart';
 import 'localization/app_localization.dart';
 
@@ -168,26 +169,23 @@ class RecipeHomePage extends StatelessWidget {
   }
 
   Widget _buildResults(MovieBloc bloc) {
-    return StreamBuilder<DataResult<RModel>>(
+    return ResultStreamBuilder<RModel>(
       stream: bloc.locationStream,
-      builder: (context, snapshot) {
-        final results = snapshot.data;
-        var success = results?.success();
-        var error = results?.failure();
-
-        if(success != null){
-          if (success.list.isEmpty) {
-            return const Center(child: Text('No Results'));
-          }
-          return _buildListView(success.list);
+      successBuilder: (context, snapshot) {
+        var success = snapshot.data!.success()!;
+        if (success.list.isEmpty) {
+          return const Center(child: Text('No Results'));
         }
-
-        if(error != null){
-          return Center(child: Text(error.toString()));
-        }
+        return _buildListView(success.list);
+      },
+      loadingBuilder: (context, snapshot){
         return const Center(
-          child: CircularProgressIndicator(),
+        child: CircularProgressIndicator(),
         );
+      },
+      errorBuilder: (context, snapshot){
+        var error = snapshot.data!.failure()!;
+        return Center(child: Text(error.toString()));
       },
     );
   }
