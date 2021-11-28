@@ -155,12 +155,17 @@ class _FailureResult<S> extends DataResult<S> {
   }
 }
 
-extension Result on DataResult<dynamic>? {
-  dynamic toResult(){
-    if(this?.isSuccess == true){
-      return this?.data;
-    }else{
-      return this?.error;
+extension Result<T> on DataResult<T> {
+
+  Failure? failure(){
+    if(isFailure){
+      return error;
+    }
+  }
+
+  T? success() {
+    if(isSuccess){
+      return data;
     }
   }
 }

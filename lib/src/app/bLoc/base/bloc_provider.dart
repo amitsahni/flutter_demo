@@ -1,10 +1,17 @@
 // 1
+import 'dart:async';
+
+import 'package:f_d/src/data/model/data_result.dart';
 import 'package:flutter/material.dart';
 
 
 abstract class Bloc {
   void initState();
   void dispose();
+
+  final errorController = StreamController<Failure>.broadcast();
+
+  Stream<Failure> get errorStream => errorController.stream;
 }
 
 class BlocProvider<T extends Bloc> extends StatefulWidget {

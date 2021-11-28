@@ -8,7 +8,7 @@ import 'package:flutter/material.dart';
 
 import 'base/bloc_provider.dart';
 
-class MovieBloc implements Bloc {
+class MovieBloc extends Bloc {
   final MovieUseCase _movieUseCase;
 
   MovieBloc(this._movieUseCase);
@@ -20,7 +20,13 @@ class MovieBloc implements Bloc {
   @override
   void initState() async {
     final results = await _movieUseCase.executes();
-    _movieController.sink.add(results);
+    if(results.isSuccess) {
+      _movieController.sink.add(results);
+    }else{
+      var model = RModel();
+      _movieController.sink.add(DataResult.success(model));
+      errorController.sink.add(results.error!);
+    }
   }
 
   void fetchMovies(String query) async {

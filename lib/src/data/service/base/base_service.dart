@@ -71,9 +71,3 @@ Dio getDio(String baseUrl) {
   dio.interceptors.add(LogInterceptor(responseBody: true, requestBody: true));
   return dio;
 }
-
-/*extension Result on Future<DataResult<dynamic>> {
-  DataResult<dynamic> toResult(){
-
-  }
-}*/

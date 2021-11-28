@@ -66,6 +66,16 @@ class RecipeHomePage extends StatelessWidget {
     // 1
     final bloc = get<MovieBloc>();
     bloc.fetchMovies('query');
+    bloc.errorStream.listen((event) {
+      final scaffold = ScaffoldMessenger.of(context);
+      scaffold.showSnackBar(
+        SnackBar(
+          content: Text(event.toString()),
+          action: SnackBarAction(
+              label: 'Done', onPressed: scaffold.hideCurrentSnackBar),
+        ),
+      );
+    });
     return BlocProvider<MovieBloc>(
         bloc: bloc,
         child: Scaffold(
@@ -137,18 +147,22 @@ class RecipeHomePage extends StatelessWidget {
       builder: (context, snapshot) {
         // 1
         final results = snapshot.data;
+        var success = results?.success();
+        var error = results?.failure();
 
-        if (results == null) {
-          return const Center(
-            child: CircularProgressIndicator(),
-          );
+        if(success != null){
+          if (success.list.isEmpty) {
+            return const Center(child: Text('No Results'));
+          }
+          return _buildListView(success.list);
         }
 
-        if (results.data!.list.isEmpty) {
-          return const Center(child: Text('No Results'));
+        if(error != null){
+            return Center(child: Text(error.toString()));
         }
-
-        return _buildListView(results.data!.list);
+        return const Center(
+          child: CircularProgressIndicator(),
+        );
       },
     );
   }
@@ -157,25 +171,23 @@ class RecipeHomePage extends StatelessWidget {
     return StreamBuilder<DataResult<RModel>>(
       stream: bloc.locationStream,
       builder: (context, snapshot) {
-        // 1
-        var result = snapshot.data;
-        if (result == null) {
-          return const Center(
-            child: CircularProgressIndicator(),
-          );
-        }
-        if(result.isSuccess == true){
-          final results = result.data!.list;
+        final results = snapshot.data;
+        var success = results?.success();
+        var error = results?.failure();
 
-          if (results.isEmpty) {
+        if(success != null){
+          if (success.list.isEmpty) {
             return const Center(child: Text('No Results'));
           }
-
-          return _buildListView(results);
-        }else{
-          String error = result.error!.toString();
-          return Center(child: Text(error));
+          return _buildListView(success.list);
         }
+
+        if(error != null){
+          return Center(child: Text(error.toString()));
+        }
+        return const Center(
+          child: CircularProgressIndicator(),
+        );
       },
     );
   }
