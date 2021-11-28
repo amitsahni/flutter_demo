@@ -20,11 +20,8 @@ class MovieBloc extends Bloc {
   @override
   void initState() async {
     final results = await _movieUseCase.executes();
-    if(results.isSuccess) {
-      _movieController.sink.add(results);
-    }else{
-      var model = RModel();
-      _movieController.sink.add(DataResult.success(model));
+    _movieController.sink.add(results);
+    if(results.isFailure) {
       errorController.sink.add(results.error!);
     }
   }
@@ -41,5 +38,6 @@ class MovieBloc extends Bloc {
   @override
   void dispose() {
     _movieController.close();
+    errorController.close();
   }
 }
