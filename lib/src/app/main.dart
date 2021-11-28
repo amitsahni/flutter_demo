@@ -47,12 +47,15 @@ class RecipeApp extends StatelessWidget {
   }
 }
 
-class RecipeHomePage extends StatelessWidget {
+class RecipeHomePage extends StatefulWidget {
+  final String title;
   const RecipeHomePage({Key? key, required this.title}) : super(key: key);
 
-  final String title;
+  @override
+  State<StatefulWidget> createState() => _RecipeHomePageState();
+}
 
-
+class _RecipeHomePageState extends State<RecipeHomePage> {
 
   @override
   Widget build(BuildContext context) {

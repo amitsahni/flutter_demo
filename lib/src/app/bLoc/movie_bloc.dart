@@ -22,7 +22,7 @@ class MovieBloc extends Bloc {
     final results = await _movieUseCase.executes();
     _movieController.sink.add(results);
     if(results.isFailure) {
-      errorController.sink.add(results.error!);
+      //errorController.sink.add(results.error!);
     }
   }
 
