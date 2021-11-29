@@ -56,6 +56,13 @@ class RecipeHomePage extends StatefulWidget {
 }
 
 class _RecipeHomePageState extends State<RecipeHomePage> {
+  late final MovieBloc bloc;
+
+  @override
+  void initState() {
+    bloc = get<MovieBloc>();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -68,7 +75,6 @@ class _RecipeHomePageState extends State<RecipeHomePage> {
       ),
     );*/
     // 1
-    final bloc = get<MovieBloc>();
     bloc.fetchMovies('query');
     bloc.errorStream.listen((event) {
       final scaffold = ScaffoldMessenger.of(context);
