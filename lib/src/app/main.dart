@@ -17,7 +17,7 @@ import 'widget/home_widget.dart';
 
 void main() {
   startKoin((app) {
-    app.module(myModule);
+    app.modules([myModule]);
   });
   runApp(RecipeApp());
 }
@@ -58,10 +58,12 @@ class RecipeHomePage extends StatefulWidget {
 
 class _RecipeHomePageState extends State<RecipeHomePage> {
   late final MovieBloc bloc;
+  late final AppLocalizations _appLocalization;
 
   @override
   void initState() {
     bloc = get<MovieBloc>();
+    _appLocalization = AppLocalizations.of(context);
     super.initState();
   }
 
@@ -91,7 +93,7 @@ class _RecipeHomePageState extends State<RecipeHomePage> {
         bloc: bloc,
         child: Scaffold(
           appBar: AppBar(
-            title: Text(AppLocalizations.of(context).translate('title')),
+            title: Text(_appLocalization.translate('title')),
           ),
           body: SafeArea(
             child: buildResults(bloc),
