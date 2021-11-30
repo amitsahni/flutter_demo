@@ -63,8 +63,8 @@ class _RecipeHomePageState extends State<RecipeHomePage> {
   @override
   void initState() {
     bloc = get<MovieBloc>();
-    _appLocalization = AppLocalizations.of(context);
     super.initState();
+
   }
 
   @override
@@ -78,6 +78,7 @@ class _RecipeHomePageState extends State<RecipeHomePage> {
       ),
     );*/
     // 1
+    _appLocalization = AppLocalizations.of(context);
     bloc.fetchMovies('query');
     bloc.errorStream.listen((event) {
       final scaffold = ScaffoldMessenger.of(context);
